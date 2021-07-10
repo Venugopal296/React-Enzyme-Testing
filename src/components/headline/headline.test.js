@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { findByTestAttr } from '../../../Utils';
+import { findByTestAttr, checkProps } from '../../../Utils';
 import Headline from './index';
 
 const setUp = (props = {}) => {
@@ -10,7 +10,28 @@ const setUp = (props = {}) => {
 };
 
 describe('Headline Component', () => {
-	describe('without props', () => {
+	describe('Checking PropsTypes', () => {
+		it('Should not throw a waring', () => {
+			const expectedProps = {
+				header: 'Test header',
+				desc: 'Test desc',
+				tempArr: [
+					{
+						fName: 'Venu',
+						lName: 'gopal',
+						email: 'vn@gmail.com',
+						age: 29,
+						onlineStatus: true,
+					},
+				],
+			};
+
+			const propsErr = checkProps(Headline, expectedProps);
+			expect(propsErr).toBeUndefined();
+		});
+	});
+
+	describe('with NO props', () => {
 		let component;
 		beforeEach(() => {
 			component = setUp();
